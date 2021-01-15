@@ -1,34 +1,37 @@
 import {
-  GET_COUNTRIES_START,
-  GET_COUNTRIES_SUCCESS,
-  GET_COUNTRIES_FAILURE,
-  CountriesState,
-  CountriesAction,
+  GET_SEARCH_START,
+  GET_SEARCH_SUCCESS,
+  GET_SEARCH_FAILURE,
+  SearchState,
+  SearchAction,
 } from './search.types';
 
-const INITIAL_STATE: CountriesState = {
+const INITIAL_STATE: SearchState = {
   data: null,
   loading: false,
+  search: '',
   error: '',
 };
 
 const searchReducer = (
   state = INITIAL_STATE,
-  action: CountriesAction
-): CountriesState => {
+  action: SearchAction
+): SearchState => {
   switch (action.type) {
-    case GET_COUNTRIES_START:
+    case GET_SEARCH_START:
       return {
         ...state,
+        search: action.payload,
         loading: true,
       };
-    case GET_COUNTRIES_SUCCESS:
+    case GET_SEARCH_SUCCESS:
       return {
         data: action.payload,
         loading: false,
+        search: '',
         error: '',
       };
-    case GET_COUNTRIES_FAILURE:
+    case GET_SEARCH_FAILURE:
       return {
         ...state,
         error: action.payload,
