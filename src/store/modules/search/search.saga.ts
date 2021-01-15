@@ -5,13 +5,15 @@ import { GET_SEARCH_START } from './search.types';
 import { getSearchSuccess, getSearchFailure } from './search.action';
 
 import { apiURl } from '../../../config.json';
+import { get } from '../../../fetch';
 
 export function* getSearchAsync(search: SearchAction) {
   try {
     const res = yield call(
-      fetch,
+      get,
       `${apiURl}?key=${process.env.REACT_APP_API_KEY}&cx=${process.env.REACT_APP_SEARCH_ENGIN_KEY}&q=${search.payload}`
     );
+    console.log('search', search.payload);
 
     if (!res) {
       const resData: SearchError = yield res;
@@ -19,6 +21,7 @@ export function* getSearchAsync(search: SearchAction) {
     }
 
     const resData: ISearch = yield res;
+    console.log('resData', resData);
     yield put(getSearchSuccess(resData));
   } catch (error) {
     yield put(getSearchFailure(error.message));
