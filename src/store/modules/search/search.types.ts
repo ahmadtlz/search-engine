@@ -50,8 +50,9 @@ export interface IItem {
   link: string;
   displayLink: string;
   snippet: string;
+  htmlTitle: string;
   htmlSnippet: string;
-  cacheID: string;
+  cacheId: string;
   formattedUrl: string;
   htmlFormattedUrl: string;
   pagemap: {
